@@ -24,49 +24,42 @@ public class FripperController : MonoBehaviour {
 	void Update () {
 
 		//左矢印キーを押した時左フリッパーを動かす
-		if (Input.GetKeyDown(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
+		if (Input.GetKeyDown (KeyCode.LeftArrow) && tag == "LeftFripperTag") {
 			SetAngle (this.flickAngle);
 		}
 		//右矢印キーを押した時右フリッパーを動かす
-		if (Input.GetKeyDown(KeyCode.RightArrow) && tag == "RightFripperTag") {
+		if (Input.GetKeyDown (KeyCode.RightArrow) && tag == "RightFripperTag") {
 			SetAngle (this.flickAngle);
 		}
 
 		//矢印キー離された時フリッパーを元に戻す
-		if (Input.GetKeyUp(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
+		if (Input.GetKeyUp (KeyCode.LeftArrow) && tag == "LeftFripperTag") {
 			SetAngle (this.defaultAngle);
 		}
-		if (Input.GetKeyUp(KeyCode.RightArrow) && tag == "RightFripperTag") {
+		if (Input.GetKeyUp (KeyCode.RightArrow) && tag == "RightFripperTag") {
 			SetAngle (this.defaultAngle);
 		}
 
-		if (Input.touchCount == 1) {
-			Touch touch = Input.GetTouch (0);
-
+		//発展課題
+		for (int i = 0; i < Input.touchCount; i++) {
+			
+			Touch touch = Input.GetTouch (i);
 			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width / 2 && tag == "LeftFripperTag") {
 				SetAngle (this.flickAngle);
 			}
 			if (touch.phase == TouchPhase.Began && touch.position.x >= Screen.width / 2 && tag == "RightFripperTag") {
 				SetAngle (this.flickAngle);
 			}
-
-
-			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width / 2 && tag == "LeftFripperTag") {
-				SetAngle (this.flickAngle);
+		
+			if (touch.phase == TouchPhase.Ended && touch.position.x < Screen.width / 2 && tag == "LeftFripperTag") {
+				SetAngle (this.defaultAngle);
 			}
 			if (touch.phase == TouchPhase.Ended && touch.position.x >= Screen.width / 2 && tag == "RightFripperTag") {
 				SetAngle (this.defaultAngle);
 			}
-		} else if (Input.touchCount == 2) {
-			Touch touch = Input.GetTouch (1);
+		} 
+	
 
-			if (touch.phase == TouchPhase.Began && tag == "LeftFripperTag" && tag == "RightFripperTag") {
-				SetAngle (this.flickAngle);
-			}
-			if (touch.phase == TouchPhase.Began && tag == "LeftFripperTag" && tag == "RightFripperTag") {
-				SetAngle (this.defaultAngle);
-			}
-		}
 			
 	}
 
